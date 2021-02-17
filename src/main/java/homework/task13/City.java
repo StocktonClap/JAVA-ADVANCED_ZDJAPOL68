@@ -51,31 +51,44 @@ public class City implements Serializable {
     }
 
     public static Set<City> countryCodes(Collection<City> cities) {
-        for (City c: cities) {
+        for (City city : cities) {
+            if (city.getCountryCode().contains("")) { // DO ZROBIENIA
+            }
         }
         return null;
     }
 
-    public static List<City> citiesInPoland (Collection<City> cities) {
-        List<City> citiesInPoland = new ArrayList<City>();
-        for (City c : cities) {
-            if (c.getCountryCode().equals("PL")) {
-                citiesInPoland.add(c);
+        public static List<City> citiesInPoland (Collection < City > cities) {
+            for (City c : cities) {
+                if (c.getCountryCode().equals("PL")) {  // do zrobienia
+
                 }
             }
-        return citiesInPoland;
+            return null;
+        }
+
+        public static List<City> citiesMoreThan1_000_000 (Collection<City> cities) {
+            List<City> cities1 = new ArrayList<City>();
+            for (City city : cities) {
+                if (1_000_000 < city.getPopulation()) {
+                    cities1.add(city);
+                }
+            }
+            return cities1;
         }
 
 
-    @Override
-    public String toString() {
-        return "City{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", longitude=" + longitude +
-                ", latitude=" + latitude +
-                ", code='" + countryCode + '\'' +
-                ", population=" + population +
-                '}';
+        @Override
+        public String toString () {
+            return "City{" +
+                    "id=" + id +
+                    ", name='" + name + '\'' +
+                    ", longitude=" + longitude +
+                    ", latitude=" + latitude +
+                    ", code='" + countryCode + '\'' +
+                    ", population=" + population +
+                    '}';
+        }
     }
-}
+
+

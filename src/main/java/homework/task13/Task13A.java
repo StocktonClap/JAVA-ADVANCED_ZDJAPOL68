@@ -1,6 +1,10 @@
 package homework.task13;
 
 import java.util.Collection;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Set;
+
 /**
  * CZESC 1
  * Na podstawie otrzymanej kolekcji miast (obiekty klasy City) stwórz kolejne kolekcje (elementy z kolekcji kopiujemy do nowej):
@@ -28,10 +32,48 @@ import java.util.Collection;
 public class Task13A {
     public static void main(String[] args) {
         Collection<City> cities = Cities.loadCities(Task13A.class.getResourceAsStream("../../cities500.txt"));
-        for(City c: cities){
-            if (c.getCountryCode().equals("PL") && c.getName().equals("Nowa Sól")) {
+        for (City c : cities) {
+            if (c.getCountryCode().equals("PL") && c.getName().equals("Stara Sól")) {
                 System.out.println(c);
             }
         }
+        System.out.println(citiesOverThan1_000_000AndDe(cities));
+        System.out.println(citiesNowaStaraSol(cities));
+        City.citiesInPoland(cities);
+        System.out.println(City.citiesMoreThan1_000_000(cities));
+
+
+    }
+
+    public static List<City> citiesSmallerThan10_000(Collection<City> cities) {  // szukanie miast poniżej 10_000
+        Iterator<City> iterator = cities.iterator();
+        while (iterator.hasNext()) {
+            City city = iterator.next();
+            if (10_000 > city.getPopulation()) {
+                iterator.remove();
+            }
+        }
+        return null;
+    }
+
+    public static List<City> citiesOverThan1_000_000AndDe(Collection<City> cities) {  // szukanie miast powyżej 1_000_000 i DE
+        Iterator<City> iterator = cities.iterator();
+        while (iterator.hasNext()) {
+            City city = iterator.next();
+            if (1_000_000 < city.getPopulation() && city.getCountryCode().equals("GB")) {
+                System.out.println(city.getName());
+            }
+        }
+        return null;
+    }
+
+    public static List<City> citiesNowaStaraSol (Collection<City> cities) {  // Nowa Sól -> Stara Sól
+        Iterator<City> iterator = cities.iterator();
+        while (iterator.hasNext()) {
+            City city = iterator.next();
+            if (city.getCountryCode().equals("PL") && city.getName().equals("Nowa")) {  // do zrobienia
+            }
+        }
+        return null;
     }
 }
