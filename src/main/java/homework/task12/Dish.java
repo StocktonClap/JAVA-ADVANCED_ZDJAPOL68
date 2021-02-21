@@ -1,25 +1,33 @@
 package homework.task12;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 public class Dish implements Ingredient{
-    final Collection<Ingredient> ingredients;
-    final String name;
+    private Map<String, Ingredient> ingredients;
+    private String name;
 
-    public Dish(String name, Collection<Ingredient> ingredients) {
+    public Dish(String name) {
         this.name = name;
+        this.ingredients = new HashMap<String, Ingredient>();
+    }
+
+    public Dish(Map<String, Ingredient> ingredients, String name) {
         this.ingredients = ingredients;
+        this.name = name;
     }
 
-    public void addIngredient (Ingredient ingredient) {
-        this.ingredients.add(ingredient);
+    public void addIngredient (String string, Ingredient ingredient) {
+        ingredients.put(string , ingredient);
     }
 
-    public void removeIngredient (Ingredient ingredient) {
-        this.ingredients.remove(ingredient);
+    public void removeIngredient (String string, Ingredient ingredient) {
+        ingredients.remove(string);
+    }
+
+
+    public Map<String, Ingredient> ingredients () {
+        Map<String, Ingredient> copyOfIngredients = new HashMap<>(ingredients);
+        return copyOfIngredients;
     }
 
     @Override
@@ -30,8 +38,8 @@ public class Dish implements Ingredient{
     @Override
     public double weight() {  // waga dania
         double sumWeight = 0;
-        for (Ingredient i : ingredients) {
-            sumWeight += i.weight();
+        for (Map.Entry<String, Ingredient> ingredientEntry : ingredients.entrySet()) {
+            sumWeight += ingredientEntry.getValue().weight();
         }
         return sumWeight;
     }
@@ -39,15 +47,10 @@ public class Dish implements Ingredient{
     @Override
     public double calories() {  // kalorie dania
         double sumCalories = 0;
-        for (Ingredient i : ingredients) {
-            sumCalories += i.calories();
+        for (Map.Entry<String, Ingredient> ingredientEntry : ingredients.entrySet()) {
+            sumCalories += ingredientEntry.getValue().calories();
         }
         return sumCalories;
-    }
-
-    public void ingredients () {
-        List<Ingredient> copyIngredients = new ArrayList<Ingredient>(ingredients);
-        System.out.println(copyIngredients);
     }
 
     @Override

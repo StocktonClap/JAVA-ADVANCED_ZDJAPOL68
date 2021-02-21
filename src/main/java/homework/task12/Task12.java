@@ -1,6 +1,7 @@
 package homework.task12;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Część 1
@@ -38,23 +39,28 @@ public class Task12 {
         Tomato tomato = new Tomato("San Marzano", 180);
         Cheese cheese = new Cheese("mozzarella", 125);
 
-        Cake cake1 = cake;
 
-        Pizza pizza = new Pizza("Pepperoni", new ArrayList<>());
-        pizza.addCake(cake);
-        System.out.println(pizza.toString());
-        pizza.addCake(cake1);
-        System.out.println(pizza.toString());
-        pizza.addTomatoSauce(tomatoSauce);
-        pizza.addHam(ham);
-        pizza.addEgg(egg);
-        pizza.addTomato(tomato);
-        pizza.addCheese(cheese);
+        Pizza pizza = new Pizza("Pepperoni");
+        pizza.addCheese(new Cheese("mozzarella", 125));
+        pizza.addCake(new Cake("cienkie ciasto", 200));
         System.out.println(pizza);
-        System.out.println("Kalorie: ");
-        System.out.format("%.2f", pizza.calories());
+
+        Pizza pizza1 = new Pizza("Mamma Mia");
+        pizza1.addCake(cake);
+        pizza1.addCheese(cheese);
+        pizza1.addTomatoSauce(tomatoSauce);
+        pizza1.addTomato(tomato);
+        pizza1.addHam(ham);
+        pizza1.addEgg(egg);
+        System.out.println(pizza1);
+
+        System.out.println("Kalorie:");
+        System.out.format("%.2f", pizza1.calories());
         System.out.println();
         System.out.println("Waga: ");
-        System.out.format("%.2f", pizza.weight());
+        System.out.format("%.2f", pizza1.weight());
+        System.out.println();
+        System.out.println(pizza.isReady());
+        System.out.println(pizza1.isReady());
     }
 }

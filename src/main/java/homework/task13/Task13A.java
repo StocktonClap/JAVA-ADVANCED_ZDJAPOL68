@@ -1,9 +1,6 @@
 package homework.task13;
 
-import java.util.Collection;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 /**
  * CZESC 1
@@ -37,43 +34,11 @@ public class Task13A {
                 System.out.println(c);
             }
         }
-        System.out.println(citiesOverThan1_000_000AndDe(cities));
-        System.out.println(citiesNowaStaraSol(cities));
+        System.out.println(City.newOldCities(cities));
         City.citiesInPoland(cities);
         System.out.println(City.citiesMoreThan1_000_000(cities));
 
-
     }
 
-    public static List<City> citiesSmallerThan10_000(Collection<City> cities) {  // szukanie miast poniżej 10_000
-        Iterator<City> iterator = cities.iterator();
-        while (iterator.hasNext()) {
-            City city = iterator.next();
-            if (10_000 > city.getPopulation()) {
-                iterator.remove();
-            }
-        }
-        return null;
-    }
 
-    public static List<City> citiesOverThan1_000_000AndDe(Collection<City> cities) {  // szukanie miast powyżej 1_000_000 i DE
-        Iterator<City> iterator = cities.iterator();
-        while (iterator.hasNext()) {
-            City city = iterator.next();
-            if (1_000_000 < city.getPopulation() && city.getCountryCode().equals("GB")) {
-                System.out.println(city.getName());
-            }
-        }
-        return null;
-    }
-
-    public static List<City> citiesNowaStaraSol (Collection<City> cities) {  // Nowa Sól -> Stara Sól
-        Iterator<City> iterator = cities.iterator();
-        while (iterator.hasNext()) {
-            City city = iterator.next();
-            if (city.getCountryCode().equals("PL") && city.getName().equals("Nowa")) {  // do zrobienia
-            }
-        }
-        return null;
-    }
 }

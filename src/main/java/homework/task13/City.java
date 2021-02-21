@@ -1,10 +1,7 @@
 package homework.task13;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 public class City implements Serializable {
 
@@ -51,32 +48,80 @@ public class City implements Serializable {
     }
 
     public static Set<City> countryCodes(Collection<City> cities) {
+        Set<City> countryCodes = new HashSet<>();
         for (City city : cities) {
-            if (city.getCountryCode().contains("")) { // DO ZROBIENIA
+            if (!city.getCountryCode().isEmpty()) { // DO ZROBIENIA
+                countryCodes.add(city);
             }
         }
-        return null;
+        return countryCodes;
     }
 
-        public static List<City> citiesInPoland (Collection < City > cities) {
-            for (City c : cities) {
-                if (c.getCountryCode().equals("PL")) {  // do zrobienia
-
-                }
+    public static List<City> citiesInPoland (Collection <City> cities) {
+        List<City> polishCities = new ArrayList<>();
+        for (City city : cities) {
+            if (city.getCountryCode().equals("PL")) {  // do zrobienia
+                polishCities.add(city);
             }
-            return null;
         }
+        return polishCities;
+    }
 
-        public static List<City> citiesMoreThan1_000_000 (Collection<City> cities) {
-            List<City> cities1 = new ArrayList<City>();
+        public static List<City> citiesMoreThan1_000_000 (Collection <City> cities) {
+            List<City> citiesMoreThan1_000_000 = new ArrayList<City>();
             for (City city : cities) {
                 if (1_000_000 < city.getPopulation()) {
-                    cities1.add(city);
+                    citiesMoreThan1_000_000.add(city);
                 }
             }
-            return cities1;
+            return citiesMoreThan1_000_000;
         }
 
+        public static Map<String, City> mapNameCities (Map<String, City> cities) {    //    DO ZROBIENIA !!!
+        return null;
+        }
+
+        public static Map<Integer, City> mapLatitudeCities (Map<Integer, City> cities) {
+        return null;
+        }
+
+    public static List<City> citiesLessThan10_000(Collection<City> cities) { // szukanie i usuwanie miast poniżej 10_000
+        List<City> citiesSmallerThan10_000 = new ArrayList<>(cities);
+        Iterator<City> iterator = citiesSmallerThan10_000.iterator();
+        while (iterator.hasNext()) {
+            City city = iterator.next();
+            if (10_000 > city.getPopulation()) {
+                iterator.remove();
+            }
+        }
+        return citiesSmallerThan10_000;
+    }
+
+    public static List<City> citiesOverThan1_000_000AndDe(Collection<City> cities) {  // szukanie i usuwanie miast powyżej 1_000_000 i DE
+        List<City> citiesOverThan1_000_000AndDe = citiesMoreThan1_000_000(cities);
+        Iterator<City> iterator = citiesOverThan1_000_000AndDe.iterator();
+        while (iterator.hasNext()) {
+            City city = iterator.next();
+            if (city.getCountryCode().equals("DE")) {
+                iterator.remove();
+            }
+        }
+        return citiesOverThan1_000_000AndDe;
+    }
+
+    public static List<City> newOldCities (Collection<City> cities) {  //  zamiana Nowa na Stara
+        List<City> polishCities = City.citiesInPoland(cities);
+        List<City> newOldCities = new ArrayList<>();
+        Iterator<City> iterator = polishCities.iterator();
+        while (iterator.hasNext()) {
+            City city = iterator.next();
+            if (city.getName().contains("Nowa")) { // do zrobienia
+                newOldCities.add(new City(city.getId(), city.getName().replace("Nowa", "Stara"), city.getLongitude(), city.getLatitude(), city.getCountryCode(), city.getPopulation()));
+            }
+            newOldCities.add(city);
+        }
+        return newOldCities;
+    }
 
         @Override
         public String toString () {

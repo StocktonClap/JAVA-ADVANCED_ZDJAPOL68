@@ -1,90 +1,93 @@
 package homework.task12;
 
-import java.util.Collection;
+import java.util.*;
 
-public class Pizza extends Dish implements Ingredient{
+public class Pizza extends Dish implements Ingredient {
+    private Map<String, Ingredient> ingredients;
 
-    public Pizza(String name, Collection<Ingredient> ingredients) {
-        super(name, ingredients);
+    public Pizza(String name) {
+        super(name);
+        this.ingredients = new HashMap<>();
     }
 
-    public boolean addCake (Cake cake) {
-        if (ingredients.contains(cake)) {
-            System.out.println("Nie można dodać produktu. Pizza zawiera już ciasto !!!");
+    public boolean addCake(Cake cake) {
+        if (ingredients.containsKey("Cake"))
             return false;
-        } else if (!ingredients.contains(cake)) {
-            ingredients.add(cake);
-            System.out.println("Dodawanie produktu");
-        }
+        ingredients.put("Cake", cake);
         return true;
     }
 
-    public boolean addHam (Ham ham) {
-        if (ingredients.contains(ham)) {
-        System.out.println("Nie można dodać produktu. Pizza zawiera już ciasto !!!");
-        return false;
-    } else if (!ingredients.contains(ham)) {
-        ingredients.add(ham);
-        System.out.println("Dodawanie produktu");
-    }
+
+    public boolean addHam(Ham ham) {
+        if (ingredients.containsKey("Ham"))
+            return false;
+        ingredients.put("Ham", ham);
         return true;
     }
+
 
     public boolean addTomato (Tomato tomato) {
-        if (ingredients.contains(tomato)) {
-            System.out.println("Nie można dodać produktu. Pizza zawiera już ciasto !!!");
+        if (ingredients.containsKey("Tomato"))
             return false;
-        } else if (!ingredients.contains(tomato)) {
-            ingredients.add(tomato);
-            System.out.println("Dodawanie produktu");
-        }
+        ingredients.put("Tomato", tomato);
         return true;
     }
 
     public boolean addEgg (Egg egg) {
-        if (ingredients.contains(egg)) {
-            System.out.println("Nie można dodać produktu. Pizza zawiera już ciasto !!!");
+        if (ingredients.containsKey("Egg"))
             return false;
-        } else if (!ingredients.contains(egg)) {
-            ingredients.add(egg);
-            System.out.println("Dodawanie produktu");
-        }
+        ingredients.put("Egg", egg);
         return true;
     }
 
     public boolean addCheese (Cheese cheese) {
-        if (ingredients.contains(cheese)) {
-            System.out.println("Nie można dodać produktu. Pizza zawiera już ciasto !!!");
+        if (ingredients.containsKey("Cheese"))
             return false;
-        } else if (!ingredients.contains(cheese)) {
-            ingredients.add(cheese);
-            System.out.println("Dodawanie produktu");
-        }
+        ingredients.put("Cheese", cheese);
         return true;
     }
 
     public boolean addTomatoSauce(TomatoSauce tomatoSauce) {
-        if (ingredients.contains(tomatoSauce)) {
-            System.out.println("Nie można dodać produktu. Pizza zawiera już ciasto !!!");
+        if (ingredients.containsKey("Tomato Sauce"))
             return false;
-        } else if (!ingredients.contains(tomatoSauce)) {
-            ingredients.add(tomatoSauce);
-            System.out.println("Dodawanie produktu");
-        }
+        ingredients.put("Tomato Sauce", tomatoSauce);
         return true;
     }
 
     //dodaj metody dodające pozostałe składniki
 
     public boolean isReady() {
-        //zwróć true jeśli są wszystkie składniki
+        if (ingredients.containsKey("Cake") &&
+                ingredients.containsKey("Tomato Sauce") &&
+                ingredients.containsKey("Ham") &&
+                ingredients.containsKey("Egg") &&
+                ingredients.containsKey("Tomato") &&
+                ingredients.containsKey("Cheese"))
+            return true;
         return false;
+    }
+
+    @Override
+    public double weight() {  // waga dania
+        double sumWeight = 0;
+        for (Map.Entry<String, Ingredient> ingredientEntry : ingredients.entrySet()) {
+            sumWeight += ingredientEntry.getValue().weight();
+        }
+        return sumWeight;
+    }
+
+    @Override
+    public double calories() {  // kalorie dania
+        double sumCalories = 0;
+        for (Map.Entry<String, Ingredient> ingredientEntry : ingredients.entrySet()) {
+            sumCalories += ingredientEntry.getValue().calories();
+        }
+        return sumCalories;
     }
 
     @Override
     public String toString() {
         return "Pizza{" +
-                ", name='" + name + '\'' +
                 "ingredients=" + ingredients +
                 '}';
     }
